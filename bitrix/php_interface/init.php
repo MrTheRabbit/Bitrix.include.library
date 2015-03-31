@@ -4,10 +4,15 @@
 CModule::AddAutoloadClasses(
 	'',
 	array(
-		'Config' 		=> '/bitrix/php_interface/include/config.php',
-		'Environment' 	=> '/bitrix/php_interface/include/environment.php',
+		'Config' 			=> '/bitrix/php_interface/include/config.php',
+		'Environment' 		=> '/bitrix/php_interface/include/environment.php',
+		'ImageResizeFilter' => '/bitrix/php_interface/include/image_resize_filter.php',
 	)
 );
+
+
+// Добавляем фильтр на изобращение, если только в CFile::ResizeImageGet в $arFilters есть ключ irf_text
+AddEventHandler('main', 'OnAfterResizeImage', Array('ImageResizeFilter', 'add'));
 
 
 /**
